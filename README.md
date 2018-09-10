@@ -7,55 +7,53 @@ one based on the source code, and one based on an incorrect test.
 
 * Simple hello world example
 * Experience with Git source code management
-* Building with Gradle (using the Gradle wrapper)
+* Building with SBT
 * Automated unit testing with JUnit
 * Continuous integration with Travis
 
 # System requirements
 
-* Java 6 SDK or later
+* Java 8 SDK or later
+* [SBT](https://www.scala-sbt.org/1.x/docs/Setup.html)
 
 # Running the Application
 
 On Linux or Mac OS X:
 
-    $ ./gradlew run
+    $ sbt run
+
+or
+
+    $ sbt 'run arg1 arg2 arg3'
 	
 On Windows:
 	
-    > gradlew run
+    > sbt run
+
+or
+
+    > sbt "run arg1 arg2 arg3"
 
 # Running the Tests
 
 On Linux or Mac OS X:
 
-    $ ./gradlew test
+    $ sbt test
 	
 On Windows:
 	
-    > gradlew test
+    > sbt test
 
-# Running the Application Outside Gradle
+# Running the Application Outside SBT
 
-Unlike running the application using Gradle's `run` task,
-this allows passing command-line arguments.
+This allows passing command-line arguments directly:
 
 On Linux or Mac OS X:
 
-    $ ./gradlew startScripts
-    $ ./build/scripts/hello-java arg1 arg2 arg3
-
-or
-
-    $ ./gradlew jar
-    $ java -jar build/lib/hello-java.jar arg1 arg2 arg3
+    $ sbt stage
+    $ ./target/universal/stage/bin/hello-java arg1 arg2 arg3
 
 On Windows:
 
-    > gradlew startScripts
-    > .\build\scripts\hello-java arg1 arg2 arg3
-
-or
-
-    > gradlew jar
-    > java -jar build\lib\hello-java.jar arg1 arg2 arg3
+    > sbt stage
+    > .\target\universal\stage\bin\hello-java arg1 arg2 arg3
