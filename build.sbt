@@ -2,7 +2,7 @@ name := "hello-java"
 
 version := "0.1"
 
-javacOptions += "-Xlint:all"
+javacOptions in compile += "-Xlint:all"
 
 javaOptions += "-enableassertions"
 
