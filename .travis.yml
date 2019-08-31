@@ -1,2 +1,5 @@
 language: java
 sudo: false
+jdk: oraclejdk8
+script: sbt coverage test coverageReport
+after_success: bash <(curl -s https://codecov.io/bash)
