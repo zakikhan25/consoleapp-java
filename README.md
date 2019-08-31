@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/LoyolaChicagoCode/hello-java-sbt.svg?branch=master)](https://travis-ci.org/LoyolaChicagoCode/hello-java-sbt)
 
 This build will always fail because it has 2 examples of failing tests:
-one based on the source code, and one based on an incorrect test.
+one because of a defect in the SUT (system under test), and one because of an error in the test itself.
 
 # Learning Objectives
 
