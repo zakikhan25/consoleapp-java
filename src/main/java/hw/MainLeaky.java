@@ -1,14 +1,15 @@
 package hw;
 
-import java.util.LinkedList;
-import java.util.Queue;
-// see https://stackoverflow.com/questions/1963806/#21699069
-// why we're using this implementation instead of java.util.ArrayQueue!
-import org.apache.commons.collections4.queue.CircularFifoQueue;
-import java.util.Scanner;
 import sun.misc.Signal;
 
-public class Main {
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+// see https://stackoverflow.com/questions/1963806/#21699069
+// why we're using this implementation instead of java.util.ArrayQueue!
+
+public class MainLeaky {
 
   public static int LAST_N_WORDS = 10;
 
@@ -40,12 +41,12 @@ public class Main {
     Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
 
     final Scanner input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
-    final Queue<String> queue = new CircularFifoQueue<>(lastNWords);
+    final Queue<String> queue = new LinkedList<>();
 
     while (input.hasNext()) {
       final String word = input.next();
       queue.add(word); // the oldest item automatically gets evicted
-      System.out.println(queue);
+      System.out.println(queue.size());
     }
   }
 }
