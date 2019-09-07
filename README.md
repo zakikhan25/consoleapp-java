@@ -1,15 +1,8 @@
-[![Build Status](https://travis-ci.org/LoyolaChicagoCode/hello-java-sbt.svg?branch=master)](https://travis-ci.org/LoyolaChicagoCode/hello-java-sbt)
-
-This build will always fail because it has 2 examples of failing tests:
-one because of a defect in the SUT (system under test), and one because of an error in the test itself.
-
 # Learning Objectives
 
-* Simple hello world example
+* Simple console app example
 * Experience with Git source code management
 * Building with SBT
-* Automated unit testing with JUnit
-* Continuous integration with Travis
 
 # System requirements
 
@@ -51,9 +44,9 @@ This allows passing command-line arguments directly:
 On Linux or Mac OS X:
 
     $ sbt stage
-    $ ./target/universal/stage/bin/hello-java arg1 arg2 arg3
+    $ ./target/universal/stage/bin/consoleapp arg1 arg2 arg3
 
 On Windows:
 
     > sbt stage
-    > .\target\universal\stage\bin\hello-java arg1 arg2 arg3
+    > .\target\universal\stage\bin\consoleapp arg1 arg2 arg3
