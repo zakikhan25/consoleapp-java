@@ -43,7 +43,7 @@ public class Main {
 
     while (input.hasNext()) {
       final String word = input.next();
-      queue.add(word);
+      queue.add(word); // the oldest item automatically gets evicted
       System.out.println(queue);
     }
   }
