@@ -37,7 +37,9 @@ public class Main {
 
     // properly terminate on SIGPIPE received from downstream
     // see also http://lucproglangcourse.github.io/imperative.html#the-role-of-console-applications
-    Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
+    if (! "Windows".equals(System.getProperty("os.name"))) {
+      Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
+    }
 
     final Scanner input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
     final Queue<String> queue = new CircularFifoQueue<>(lastNWords);
