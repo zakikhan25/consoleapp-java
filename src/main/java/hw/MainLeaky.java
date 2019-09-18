@@ -18,7 +18,7 @@ public class MainLeaky {
     // TODO consider using a command-line option library
 
     // perform argument validity checking
-    if (args.length > 2) {
+    if (args.length > 1) {
       System.err.println("usage: ./target/universal/stage/bin/consoleapp [ last_n_words ]");
       System.exit(2);
     }
