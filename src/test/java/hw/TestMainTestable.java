@@ -73,9 +73,9 @@ public class TestMainTestable {
         };
     sut.slidingWindow(input, outputToList);
     assertEquals(4, result.size());
-    assertEquals("asdf", result.get(0).peek()); // [asdf]
-    assertEquals("asdf", result.get(1).peek()); // [asdf,qwer]
-    assertEquals("asdf", result.get(2).peek()); // [asdf,qwer,oiui]
-    assertEquals("qwer", result.get(3).peek()); // [qwer,oiui,zxcv]
+    assertArrayEquals(new String[] {"asdf"}, result.get(0).toArray());
+    assertArrayEquals(new String[] {"asdf", "qwer"}, result.get(1).toArray());
+    assertArrayEquals(new String[] {"asdf", "qwer", "oiui"}, result.get(2).toArray());
+    assertArrayEquals(new String[] {"qwer", "oiui", "zxcv"}, result.get(3).toArray());
   }
 }
