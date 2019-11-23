@@ -57,8 +57,7 @@ public class TestMainTestable {
   @Test
   public void testSlidingWindowNonempty() {
     final WindowMaker sut = new WindowMaker(3);
-    final Iterator<String> input =
-        Arrays.asList(new String[] {"asdf", "qwer", "oiui", "zxcv"}).iterator();
+    final Iterator<String> input = Arrays.asList("asdf", "qwer", "oiui", "zxcv").iterator();
     final List<Queue<String>> result = new ArrayList<>();
     final Output outputToList =
         (final Queue<String> value) -> {
