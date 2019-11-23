@@ -1,6 +1,5 @@
 package hw;
 
-import java.util.LinkedList;
 import java.util.Queue;
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
