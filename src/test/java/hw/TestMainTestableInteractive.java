@@ -55,8 +55,7 @@ public class TestMainTestableInteractive {
   @Test
   public void testInteractiveBehavior() {
     final WindowMaker sut = new WindowMaker(3);
-    final Iterator<String> input =
-        Arrays.asList(new String[] {"asdf", "qwer", "oiui", "zxcv"}).iterator();
+    final Iterator<String> input = Arrays.asList("asdf", "qwer", "oiui", "zxcv").iterator();
     // the actual event trace instance
     final List<TraceEvent<String, List<String>>> trace = new LinkedList<>();
     // instrument the iterator so that every invocation of next() gets traced
