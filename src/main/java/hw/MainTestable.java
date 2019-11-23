@@ -46,13 +46,7 @@ public class MainTestable {
     final WindowMaker wm = new WindowMaker(lastNWords);
 
     // an observer instance that sends updates to the console
-    final Output outputToConsole =
-        new Output() {
-          @Override
-          public void update(Queue<String> value) {
-            System.out.println(value);
-          }
-        };
+    final Output outputToConsole = (final Queue<String> value) -> System.out.println(value);
 
     wm.slidingWindow(input, outputToConsole);
   }
@@ -65,14 +59,13 @@ interface Output {
 
 class WindowMaker {
 
-  final Queue<String> queue;
+  protected final Queue<String> queue;
 
   public WindowMaker(final int queueSize) {
     this.queue = new CircularFifoQueue<>(queueSize);
   }
 
   public void slidingWindow(final Iterator<String> input, final Output output) {
-
     while (input.hasNext()) {
       final String word = input.next();
       queue.add(word); // the oldest item automatically gets evicted

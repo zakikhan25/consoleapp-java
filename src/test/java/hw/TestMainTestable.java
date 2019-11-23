@@ -21,8 +21,7 @@ public class TestMainTestable {
 
   @Test
   public void testIteratorNonempty() {
-    final Iterator<String> input =
-        Arrays.asList(new String[] {"hello", "world", "what", "up"}).iterator();
+    final Iterator<String> input = Arrays.asList("hello", "world", "what", "up").iterator();
     assertTrue(input.hasNext());
     assertEquals("hello", input.next());
     assertTrue(input.hasNext());
@@ -36,22 +35,20 @@ public class TestMainTestable {
 
   @Test
   public void testIteratorEmpty() {
-    final Iterator<String> input = Arrays.asList(new String[] {}).iterator();
+    final Iterator<String> input = Collections.emptyIterator();
     assertFalse(input.hasNext());
   }
 
   @Test
   public void testSlidingWindowEmpty() {
     final WindowMaker sut = new WindowMaker(3);
-    final Iterator<String> input = Arrays.asList(new String[] {}).iterator();
+    final Iterator<String> input = Collections.emptyIterator();
     final List<Queue<String>> result = new ArrayList<>();
     // an observer instance that sends updates to a buffer (list) for testing
     final Output outputToList =
-        new Output() {
-          public void update(final Queue<String> value) {
-            final Queue<String> copyOfValue = new LinkedList<>(value);
-            result.add(copyOfValue);
-          }
+        (final Queue<String> value) -> {
+          final Queue<String> copyOfValue = new LinkedList<>(value);
+          result.add(copyOfValue);
         };
     sut.slidingWindow(input, outputToList);
     assertTrue(result.isEmpty());
@@ -64,12 +61,9 @@ public class TestMainTestable {
         Arrays.asList(new String[] {"asdf", "qwer", "oiui", "zxcv"}).iterator();
     final List<Queue<String>> result = new ArrayList<>();
     final Output outputToList =
-        new Output() {
-          public void update(final Queue<String> value) {
-            final Queue<String> copyOfValue = new LinkedList<>();
-            copyOfValue.addAll(value);
-            result.add(copyOfValue);
-          }
+        (final Queue<String> value) -> {
+          final Queue<String> copyOfValue = new LinkedList<>(value);
+          result.add(copyOfValue);
         };
     sut.slidingWindow(input, outputToList);
     assertEquals(4, result.size());

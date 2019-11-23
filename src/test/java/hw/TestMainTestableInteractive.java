@@ -76,23 +76,20 @@ public class TestMainTestableInteractive {
         };
     // create an output sink so that every invocation of update() gets traced
     final Output outputToTrace =
-        new Output() {
-          public void update(final Queue<String> value) {
-            final List<String> copyOfValue = new LinkedList<>();
-            copyOfValue.addAll(value);
-            trace.add(new OutputEvent(copyOfValue));
-          }
+        (final Queue<String> value) -> {
+          final List<String> copyOfValue = new LinkedList<>(value);
+          trace.add(new OutputEvent<>(copyOfValue));
         };
     // the expected trace
     final List<TraceEvent<String, List<String>>> expectedTrace = new LinkedList<>();
     expectedTrace.add(new InputEvent<>("asdf"));
-    expectedTrace.add(new OutputEvent<>(Arrays.asList(new String[] {"asdf"})));
+    expectedTrace.add(new OutputEvent<>(Arrays.asList("asdf")));
     expectedTrace.add(new InputEvent<>("qwer"));
-    expectedTrace.add(new OutputEvent<>(Arrays.asList(new String[] {"asdf", "qwer"})));
+    expectedTrace.add(new OutputEvent<>(Arrays.asList("asdf", "qwer")));
     expectedTrace.add(new InputEvent<>("oiui"));
-    expectedTrace.add(new OutputEvent<>(Arrays.asList(new String[] {"asdf", "qwer", "oiui"})));
+    expectedTrace.add(new OutputEvent<>(Arrays.asList("asdf", "qwer", "oiui")));
     expectedTrace.add(new InputEvent<>("zxcv"));
-    expectedTrace.add(new OutputEvent<>(Arrays.asList(new String[] {"qwer", "oiui", "zxcv"})));
+    expectedTrace.add(new OutputEvent<>(Arrays.asList("qwer", "oiui", "zxcv")));
     // exercise the SUT
     sut.slidingWindow(tracedInput, outputToTrace);
     // make sure the expected and actual traces match
