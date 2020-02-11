@@ -1,5 +1,7 @@
 # Under construction - not current for this example
 
+TODO change instructions to mvn
+
 # Learning Objectives
 
 * Simple console app example
