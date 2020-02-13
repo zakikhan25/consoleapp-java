@@ -17,15 +17,15 @@ public class Main {
     // TODO consider using a command-line option library
     // TODO this shows how to do it; still need to add help
     // TODO consider wrapping this in a static method similar to scopt approach: MyConfig getCommandLine(MyConfig defaults)
-    Options options = new Options();
-    Option lastnOpt = Option.builder("lastn").hasArg().build();
+    final Options options = new Options();
+    final Option lastnOpt = Option.builder("lastn").hasArg().build();
     lastnOpt.setType(Number.class);
     options.addOption(lastnOpt);
-    CommandLineParser parser = new DefaultParser();
+    final CommandLineParser parser = new DefaultParser();
     int lastNWords = LAST_N_WORDS;
     try {
-      CommandLine cmd = parser.parse( options, args);
-      Number lastn = (Number)cmd.getParsedOptionValue("lastn"); 
+      final CommandLine cmd = parser.parse(options, args);
+      final Number lastn = (Number)cmd.getParsedOptionValue("lastn");
       if (lastn != null) {
         lastNWords = lastn.intValue();
       }
