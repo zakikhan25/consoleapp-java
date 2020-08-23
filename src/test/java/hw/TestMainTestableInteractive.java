@@ -50,6 +50,11 @@ class InputEvent implements TraceEvent {
   }
 
   @Override
+  public int hashCode() {
+    return value.hashCode();
+  }
+
+  @Override
   public String toString() {
     return "InputEvent(" + value + ")";
   }
@@ -60,6 +65,11 @@ class OutputEvent implements TraceEvent {
 
   public OutputEvent(final String... values) {
     this.value = Arrays.asList(values);
+  }
+
+  @Override
+  public int hashCode() {
+    return value.hashCode();
   }
 
   @Override
