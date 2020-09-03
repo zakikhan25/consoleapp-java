@@ -4,7 +4,6 @@ import java.util.Queue;
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
 import org.apache.commons.collections4.queue.CircularFifoQueue;
-import org.apache.commons.cli.*;
 import java.util.Scanner;
 import sun.misc.Signal;
 
@@ -15,23 +14,24 @@ public class Main {
   public static void main(final String[] args) {
 
     // TODO consider using a command-line option library
-    // TODO this shows how to do it; still need to add help
-    // TODO consider wrapping this in a static method similar to scopt approach: MyConfig getCommandLine(MyConfig defaults)
-    final Options options = new Options();
-    final Option lastnOpt = Option.builder("lastn").hasArg().build();
-    lastnOpt.setType(Number.class);
-    options.addOption(lastnOpt);
-    final CommandLineParser parser = new DefaultParser();
+
+    // perform argument validity checking
+    if (args.length > 1) {
+        System.err.println("usage: ./target/universal/stage/bin/consoleapp [ last_n_words ]");
+        System.exit(2);
+    }
+
     int lastNWords = LAST_N_WORDS;
     try {
-      final CommandLine cmd = parser.parse(options, args);
-      final Number lastn = (Number)cmd.getParsedOptionValue("lastn");
-      if (lastn != null) {
-        lastNWords = lastn.intValue();
-      }
-    } catch (final ParseException pe) {
-      System.err.println("Could not parse command line.");
-      System.exit(1);
+        if (args.length == 1) {
+            lastNWords = Integer.parseInt(args[0]);
+            if (lastNWords < 1) {
+                throw new NumberFormatException();
+            }
+        }
+    } catch (final NumberFormatException ex) {
+        System.err.println("argument should be a natural number");
+        System.exit(4);
     }
 
     // properly terminate on SIGPIPE received from downstream
