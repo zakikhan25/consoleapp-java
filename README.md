@@ -15,21 +15,23 @@ Alternatively, you can use an IDE such as IntelliJ IDEA or Android Studio.
 
 # Running the application
 
+For the remaining commands to work, you should be in the project root directory, e.g., `/home/yourid/StudioProjects/cs313413f20p1a`.
+
 On Linux or Mac OS X:
 
     $ ./gradlew run
 
-or
+or with an explicit argument and redirecting stdin from a sample file:
 
-    $ ./gradlew run --args="3"
+    $ ./gradlew run --args="3" < build.gradle
 
 On Windows:
 
     > gradlew run
 
-or
+or with an explicit argument and redirecting stdin from a sample file:
 
-    > gradlew run --args="3"
+    > gradlew run --args="3" < build.gradle
 
 # Running the tests
 
@@ -43,8 +45,6 @@ On Windows:
 
 # Running the application outside Gradle
 
-This allows passing command-line arguments directly:
-
 On Linux or Mac OS X:
 
     $ ./gradlew jar startScript
@@ -55,8 +55,13 @@ On Windows:
     > gradlew jar startSCript
     > build\scripts\consoleapp-java
 
-Using the "fat" jar, which contains the application code plus its dependencies, one can choose among the various versions of the main application.
+This allows using the application as part of a [pipeline](https://ss64.com/nt/syntax-redirection.html):
+
+    $ yes hello | ./build/scripts/consoleapp-java | head -n 10
+
+Furthermore, using the "fat" jar, which contains the application code plus its dependencies, one can choose among the various versions of the main application.
 This requires having the `java` executable in the execution path.
+Add command-line arguments and input/output redirect as needed.
 
 On Linux or Mac OS X:
 
