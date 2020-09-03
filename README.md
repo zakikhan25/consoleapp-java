@@ -1,4 +1,4 @@
-# Learning Objectives
+# Learning objectives
 
 * Simple console app example
 * Experience with Git source code management
@@ -11,45 +11,63 @@
 
 You may also be able to install these requirements through your package manager or [SDKMAN!](https://sdkman.io/).
 
+Alternatively, you can use an IDE such as IntelliJ IDEA or Android Studio.
 
-# Running the Application
-
-On Linux or Mac OS X:
-
-    $ sbt run
-
-or
-
-    $ sbt 'run arg1 arg2 arg3'
-
-On Windows:
-
-    > sbt run
-
-or
-
-    > sbt "run arg1 arg2 arg3"
-
-# Running the Tests
+# Running the application
 
 On Linux or Mac OS X:
 
-    $ sbt test
+    $ ./gradlew run
+
+or
+
+    $ ./gradlew run --args="3"
 
 On Windows:
 
-    > sbt test
+    > gradlew run
 
-# Running the Application Outside SBT
+or
+
+    > gradlew run --args="3"
+
+# Running the tests
+
+On Linux or Mac OS X:
+
+    $ ./gradlew test
+
+On Windows:
+
+    > gradlew test
+
+# Running the application outside Gradle
 
 This allows passing command-line arguments directly:
 
 On Linux or Mac OS X:
 
-    $ sbt stage
-    $ ./target/universal/stage/bin/consoleapp arg1 arg2 arg3
+    $ ./gradlew jar startScript
+    $ ./build/scripts/consoleapp-java
 
 On Windows:
 
-    > sbt stage
-    > .\target\universal\stage\bin\consoleapp arg1 arg2 arg3
+    > gradlew jar startSCript
+    > build\scripts\consoleapp-java
+
+Using the "fat" jar, which contains the application code plus its dependencies, one can choose among the various versions of the main application.
+This requires having the `java` executable in the execution path.
+
+On Linux or Mac OS X:
+
+    $ ./gradlew jar
+    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main
+    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainLeaky
+    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainTestable
+
+On Windows:
+
+    > gradlew jar
+    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main
+    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainLeaky
+    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainTestable
