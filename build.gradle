@@ -27,6 +27,8 @@ compileJava {
 libsDirName = 'lib' // simple workaround for error in startScripts task
 mainClassName = 'hw.Main'
 
+// create "fat" jar with all dependencies
+
 jar {
     manifest {
         attributes 'Main-Class' : mainClassName

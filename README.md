@@ -1,17 +1,16 @@
-# Under construction - not current for this example
-
-TODO change instructions to mvn
-
 # Learning Objectives
 
 * Simple console app example
 * Experience with Git source code management
-* Building with SBT
+* Building with Gradle
 
 # System requirements
 
-* Java 8 SDK or later
-* [SBT](https://www.scala-sbt.org/1.x/docs/Setup.html)
+* [Java 11 SDK or later](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+* [Gradle](https://gradle.org/)
+
+You may also be able to install these requirements through your package manager or [SDKMAN!](https://sdkman.io/).
+
 
 # Running the Application
 
@@ -22,9 +21,9 @@ On Linux or Mac OS X:
 or
 
     $ sbt 'run arg1 arg2 arg3'
-	
+
 On Windows:
-	
+
     > sbt run
 
 or
@@ -36,9 +35,9 @@ or
 On Linux or Mac OS X:
 
     $ sbt test
-	
+
 On Windows:
-	
+
     > sbt test
 
 # Running the Application Outside SBT
