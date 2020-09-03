@@ -22,7 +22,11 @@ compileJava {
     options.encoding = 'UTF-8'
 }
 
-// startScript configuration
+// run and startScript configuration
+
+run {
+    standardInput = System.in
+}
 
 libsDirName = 'lib' // simple workaround for error in startScripts task
 mainClassName = 'hw.Main'
