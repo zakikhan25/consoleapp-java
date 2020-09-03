@@ -1,33 +1,45 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+    id 'com.github.sherter.google-java-format' version '0.5'
+}
+
+apply plugin: 'application'
+
+// project info
 
 group = 'edu.luc.cs.cs313'
 
 version = '0.1-SNAPSHOT'
 
-
 description = """consoleapp"""
+
+// compiler options
 
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
-tasks.withType(JavaCompile) {
+compileJava {
     options.compilerArgs << "-Xlint:unchecked"
     options.encoding = 'UTF-8'
 }
 
+// startScript configuration
+
+libsDirName = 'lib' // simple workaround for error in startScripts task
+mainClassName = 'hw.Main'
+
 jar {
     manifest {
-        attributes 'Main-Class' : 'hw.Main'
+        attributes 'Main-Class' : mainClassName
     }
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
+// dependencies
 
 repositories {
-     maven { url "https://repo.maven.apache.org/maven2" }
+    jcenter()
 }
 
 dependencies {
