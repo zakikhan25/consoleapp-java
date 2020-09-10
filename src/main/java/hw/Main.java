@@ -9,7 +9,7 @@ import sun.misc.Signal;
 
 public class Main {
 
-  public static int LAST_N_WORDS = 10;
+  public static final int LAST_N_WORDS = 10;
 
   public static void main(final String[] args) {
 
@@ -21,7 +21,7 @@ public class Main {
         System.exit(2);
     }
 
-    int lastNWords = LAST_N_WORDS;
+    var lastNWords = LAST_N_WORDS;
     try {
         if (args.length == 1) {
             lastNWords = Integer.parseInt(args[0]);
