@@ -29,7 +29,7 @@ If multiple words are entered on the same line, the application processes them s
 # Examples
 
 ```
-$ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main 5
+$ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main 3
 w1 w2
 [w1]
 [w1, w2]
