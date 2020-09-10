@@ -52,7 +52,7 @@ On Linux or Mac OS X:
 
 On Windows:
 
-    > gradlew jar startSCript
+    > gradlew jar startScript
     > build\scripts\consoleapp-java
 
 This allows using the application as part of a [pipeline](https://ss64.com/nt/syntax-redirection.html):
