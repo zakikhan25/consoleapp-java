@@ -1,8 +1,15 @@
 # Learning objectives
 
-* Simple console app example
-* Experience with Git source code management
-* Building with Gradle
+* simple console app example
+* experience with Git source code management
+* building with Gradle
+* stream processing (finite vs. infinite/unbounded)
+* pipes and filters architecture
+* representing streams using the Iterator design pattern
+* separation of processing and I/O concerns
+* testability using the Observer design pattern
+* time/space complexity and scalability
+
 
 # System requirements
 
