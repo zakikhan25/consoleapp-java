@@ -37,7 +37,7 @@ public class MainTestable {
 
     // properly terminate on SIGPIPE received from downstream
     // see also http://lucproglangcourse.github.io/imperative.html#the-role-of-console-applications
-    if (!"Windows".equals(System.getProperty("os.name"))) {
+    if (System.getProperty("os.name").indexOf("Windows") < 0) {
       Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
     }
 
