@@ -54,11 +54,7 @@ public class TestSlidingQueue {
     final Iterator<String> input = Collections.emptyIterator();
     final List<Queue<String>> result = new ArrayList<>();
     // an observer instance that sends updates to a buffer (list) for testing
-    final Output outputToList =
-        (final Queue<String> value) -> {
-          final Queue<String> snapshot = new LinkedList<>(value);
-          result.add(snapshot);
-        };
+    final var outputToList = new OutputToList();
     sut.process(input, outputToList);
     assertTrue(result.isEmpty());
   }
@@ -67,17 +63,24 @@ public class TestSlidingQueue {
   public void testSlidingWindowNonempty() {
     final SlidingQueue sut = new SlidingQueue(3);
     final Iterator<String> input = Arrays.asList("asdf", "qwer", "oiui", "zxcv").iterator();
-    final List<Queue<String>> result = new ArrayList<>();
-    final Output outputToList =
-        (final Queue<String> value) -> {
-          final Queue<String> snapshot = new LinkedList<>(value);
-          result.add(snapshot);
-        };
+    final var outputToList = new OutputToList();
     sut.process(input, outputToList);
+    final var result = outputToList.result;
     assertEquals(4, result.size());
     assertArrayEquals(new String[] {"asdf"}, result.get(0).toArray());
     assertArrayEquals(new String[] {"asdf", "qwer"}, result.get(1).toArray());
     assertArrayEquals(new String[] {"asdf", "qwer", "oiui"}, result.get(2).toArray());
     assertArrayEquals(new String[] {"qwer", "oiui", "zxcv"}, result.get(3).toArray());
+  }
+
+  private static class OutputToList implements Output {
+
+    final List<Queue<String>> result = new ArrayList<>();
+
+    @Override
+    public void update(final Queue<String> value) {
+      final Queue<String> snapshot = new LinkedList<>(value);
+      result.add(snapshot);
+    };
   }
 }
