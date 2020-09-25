@@ -2,11 +2,20 @@ package hw;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class TestMainTestable {
+public class TestSlidingQueue {
 
   @Test
   public void testTrivialExample() {
@@ -41,7 +50,7 @@ public class TestMainTestable {
 
   @Test
   public void testSlidingWindowEmpty() {
-    final WindowMaker sut = new WindowMaker(3);
+    final SlidingQueue sut = new SlidingQueue(3);
     final Iterator<String> input = Collections.emptyIterator();
     final List<Queue<String>> result = new ArrayList<>();
     // an observer instance that sends updates to a buffer (list) for testing
@@ -50,13 +59,13 @@ public class TestMainTestable {
           final Queue<String> copyOfValue = new LinkedList<>(value);
           result.add(copyOfValue);
         };
-    sut.slidingWindow(input, outputToList);
+    sut.process(input, outputToList);
     assertTrue(result.isEmpty());
   }
 
   @Test
   public void testSlidingWindowNonempty() {
-    final WindowMaker sut = new WindowMaker(3);
+    final SlidingQueue sut = new SlidingQueue(3);
     final Iterator<String> input = Arrays.asList("asdf", "qwer", "oiui", "zxcv").iterator();
     final List<Queue<String>> result = new ArrayList<>();
     final Output outputToList =
@@ -64,7 +73,7 @@ public class TestMainTestable {
           final Queue<String> copyOfValue = new LinkedList<>(value);
           result.add(copyOfValue);
         };
-    sut.slidingWindow(input, outputToList);
+    sut.process(input, outputToList);
     assertEquals(4, result.size());
     assertArrayEquals(new String[] {"asdf"}, result.get(0).toArray());
     assertArrayEquals(new String[] {"asdf", "qwer"}, result.get(1).toArray());

@@ -1,14 +1,15 @@
 package hw;
 
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
+import java.util.Scanner;
+
+import sun.misc.Signal;
+
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
-import org.apache.commons.collections4.queue.CircularFifoQueue;
-import java.util.Scanner;
-import sun.misc.Signal;
 
 public class Main {
 

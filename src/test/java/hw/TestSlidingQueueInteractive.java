@@ -2,11 +2,16 @@ package hw;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class TestMainTestableInteractive {
+public class TestSlidingQueueInteractive {
 
   @Test
   public void testInteractiveBehavior() {
@@ -23,7 +28,7 @@ public class TestMainTestableInteractive {
     expectedTrace.add(new InputEvent("zxcv"));
     expectedTrace.add(new OutputEvent("qwer", "oiui", "zxcv"));
     // create and exercise the SUT
-    final WindowMaker sut = new WindowMaker(3);
+    final SlidingQueue sut = new SlidingQueue(3);
     final List<TraceEvent> actualTrace = new Tracing(sut).run(input);
     // make sure the expected and actual traces match
     assertEquals(expectedTrace, actualTrace);
@@ -88,12 +93,12 @@ class OutputEvent implements TraceEvent {
 
 class Tracing {
 
-  private final WindowMaker sut;
+  private final SlidingQueue sut;
 
   /** The actual interaction event trace. */
   private final List<TraceEvent> trace = new LinkedList<>();
 
-  public Tracing(final WindowMaker sut) {
+  public Tracing(final SlidingQueue sut) {
     this.sut = sut;
   }
 
@@ -105,7 +110,7 @@ class Tracing {
           final List<String> copyOfValue = new LinkedList<>(value);
           trace.add(new OutputEvent(copyOfValue.toArray(new String[] {})));
         };
-    sut.slidingWindow(tracedInput, outputToTrace);
+    sut.process(tracedInput, outputToTrace);
     return Collections.unmodifiableList(trace);
   }
 

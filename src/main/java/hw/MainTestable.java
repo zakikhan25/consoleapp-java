@@ -1,9 +1,10 @@
 package hw;
 
-import org.apache.commons.collections4.queue.CircularFifoQueue;
-import sun.misc.Signal;
+import java.util.Iterator;
+import java.util.Queue;
+import java.util.Scanner;
 
-import java.util.*;
+import sun.misc.Signal;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
@@ -43,11 +44,11 @@ public class MainTestable {
 
     final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
 
-    final WindowMaker wm = new WindowMaker(lastNWords);
+    final SlidingQueue slidingQueue = new SlidingQueue(lastNWords);
 
     // an observer instance that sends updates to the console
     final Output outputToConsole = (final Queue<String> value) -> System.out.println(value);
 
-    wm.slidingWindow(input, outputToConsole);
+    slidingQueue.process(input, outputToConsole);
   }
 }
