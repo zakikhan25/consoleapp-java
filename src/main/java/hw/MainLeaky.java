@@ -1,8 +1,13 @@
 package hw;
 
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+
 import sun.misc.Signal;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -42,13 +47,32 @@ public class MainLeaky {
       Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
     }
 
-    final Scanner input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
-    final Queue<String> queue = new LinkedList<>();
+    final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
 
-    while (input.hasNext()) {
-      final String word = input.next();
-      queue.add(word); // the oldest item automatically gets evicted
-      System.out.println(queue.size());
+    final var result = new LeakyQueue(lastNWords).process(input);
+
+    for (final var value : result) {
+      System.out.println(value);
+    }
+  }
+
+  private static class LeakyQueue {
+
+    private final Queue<String> queue;
+
+    public LeakyQueue(final int capacity) {
+      queue = new CircularFifoQueue<>(capacity);
+    }
+
+    private List<Queue<String>> process(final Iterator<String> input) {
+      final List<Queue<String>> result = new LinkedList<>();
+      while (input.hasNext()) {
+        final String word = input.next();
+        queue.add(word); // the oldest item automatically gets evicted
+        final Queue<String> snapshot = new LinkedList<>(queue);
+        result.add(snapshot);
+      }
+      return result;
     }
   }
 }
