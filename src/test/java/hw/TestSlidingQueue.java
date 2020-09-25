@@ -56,8 +56,8 @@ public class TestSlidingQueue {
     // an observer instance that sends updates to a buffer (list) for testing
     final Output outputToList =
         (final Queue<String> value) -> {
-          final Queue<String> copyOfValue = new LinkedList<>(value);
-          result.add(copyOfValue);
+          final Queue<String> snapshot = new LinkedList<>(value);
+          result.add(snapshot);
         };
     sut.process(input, outputToList);
     assertTrue(result.isEmpty());
@@ -70,8 +70,8 @@ public class TestSlidingQueue {
     final List<Queue<String>> result = new ArrayList<>();
     final Output outputToList =
         (final Queue<String> value) -> {
-          final Queue<String> copyOfValue = new LinkedList<>(value);
-          result.add(copyOfValue);
+          final Queue<String> snapshot = new LinkedList<>(value);
+          result.add(snapshot);
         };
     sut.process(input, outputToList);
     assertEquals(4, result.size());

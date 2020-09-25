@@ -107,8 +107,8 @@ class Tracing {
     // output sink that traces every invocation of update()
     final Output outputToTrace =
         (final Queue<String> value) -> {
-          final List<String> copyOfValue = new LinkedList<>(value);
-          trace.add(new OutputEvent(copyOfValue.toArray(new String[] {})));
+          final List<String> snapshot = new LinkedList<>(value);
+          trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
         };
     sut.process(tracedInput, outputToTrace);
     return Collections.unmodifiableList(trace);
