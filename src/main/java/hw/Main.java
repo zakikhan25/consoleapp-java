@@ -21,21 +21,21 @@ public class Main {
 
     // perform argument validity checking
     if (args.length > 1) {
-        System.err.println("usage: ./target/universal/stage/bin/consoleapp [ last_n_words ]");
-        System.exit(2);
+      System.err.println("usage: ./target/universal/stage/bin/consoleapp [ last_n_words ]");
+      System.exit(2);
     }
 
     var lastNWords = LAST_N_WORDS;
     try {
-        if (args.length == 1) {
-            lastNWords = Integer.parseInt(args[0]);
-            if (lastNWords < 1) {
-                throw new NumberFormatException();
-            }
+      if (args.length == 1) {
+        lastNWords = Integer.parseInt(args[0]);
+        if (lastNWords < 1) {
+          throw new NumberFormatException();
         }
+      }
     } catch (final NumberFormatException ex) {
-        System.err.println("argument should be a natural number");
-        System.exit(4);
+      System.err.println("argument should be a natural number");
+      System.exit(4);
     }
 
     // properly terminate on SIGPIPE received from downstream
