@@ -73,12 +73,12 @@ public class TestSlidingQueue {
     assertArrayEquals(new String[] {"qwer", "oiui", "zxcv"}, result.get(3).toArray());
   }
 
-  private static class OutputToList implements Output {
+  private static class OutputToList implements OutputObserver {
 
     final List<Queue<String>> result = new ArrayList<>();
 
     @Override
-    public void update(final Queue<String> value) {
+    public void accept(final Queue<String> value) {
       final Queue<String> snapshot = new LinkedList<>(value);
       result.add(snapshot);
     };

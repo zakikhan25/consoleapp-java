@@ -105,7 +105,7 @@ class Tracing {
   public List<TraceEvent> run(final Iterator<String> input) {
     final Iterator<String> tracedInput = traced(input);
     // output sink that traces every invocation of update()
-    final Output outputToTrace =
+    final OutputObserver outputToTrace =
         (final Queue<String> value) -> {
           final List<String> snapshot = new LinkedList<>(value);
           trace.add(new OutputEvent(snapshot.toArray(new String[] {})));

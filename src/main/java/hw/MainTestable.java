@@ -47,7 +47,7 @@ public class MainTestable {
     final SlidingQueue slidingQueue = new SlidingQueue(lastNWords);
 
     // an observer instance that sends updates to the console
-    final Output outputToConsole = (final Queue<String> value) -> System.out.println(value);
+    final OutputObserver outputToConsole = (final Queue<String> value) -> System.out.println(value);
 
     slidingQueue.process(input, outputToConsole);
   }
