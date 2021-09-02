@@ -82,6 +82,28 @@ On Windows:
 
     > gradlew test
 
+## Generating the test coverage reports
+
+On Linux or Mac OS X:
+
+    $ ./gradlew jacocoTestReport
+
+On Windows:
+
+    > gradlew jacocoTestReport
+
+The formatted HTML test coverage report will show up in 
+
+    build/reports/jacoco/test/html/index.html
+
+On Linux, assuming you're in the project root directory, you can open the test coverage report from the command line:
+
+    $ xdg-open build/reports/jacoco/test/html/index.html
+
+On Mac OS X, you can just use the `open` command:
+
+    $ open build/reports/jacoco/test/html/index.html
+
 # Running the application outside Gradle
 
 On Linux or Mac OS X:
