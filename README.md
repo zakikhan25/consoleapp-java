@@ -1,3 +1,5 @@
+[![Gradle Build](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml)
+
 # Learning objectives
 
 * simple console app example
