@@ -1,6 +1,9 @@
 package hw;
 
-import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class TestSlidingQueue {
 
@@ -81,6 +80,7 @@ public class TestSlidingQueue {
     public void accept(final Queue<String> value) {
       final Queue<String> snapshot = new LinkedList<>(value);
       result.add(snapshot);
-    };
+    }
+    ;
   }
 }

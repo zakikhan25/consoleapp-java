@@ -1,9 +1,8 @@
 package hw;
 
-import org.apache.commons.collections4.queue.CircularFifoQueue;
-
 import java.util.Iterator;
 import java.util.Queue;
+import org.apache.commons.collections4.queue.CircularFifoQueue;
 
 class SlidingQueue {
 

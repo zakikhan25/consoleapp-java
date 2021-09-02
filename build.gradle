@@ -1,7 +1,8 @@
 plugins {
-    id 'com.github.sherter.google-java-format' version '0.5'
+    id 'com.github.sherter.google-java-format' version '0.9'
 }
 
+apply plugin: 'java'
 apply plugin: 'application'
 
 // project info
@@ -38,7 +39,7 @@ jar {
         attributes 'Main-Class' : mainClassName
     }
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
