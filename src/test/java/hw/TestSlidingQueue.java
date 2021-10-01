@@ -51,10 +51,10 @@ public class TestSlidingQueue {
   public void testSlidingWindowEmpty() {
     final SlidingQueue sut = new SlidingQueue(3);
     final Iterator<String> input = Collections.emptyIterator();
-    final List<Queue<String>> result = new ArrayList<>();
     // an observer instance that sends updates to a buffer (list) for testing
     final var outputToList = new OutputToList();
     sut.process(input, outputToList);
+    final var result = outputToList.result;
     assertTrue(result.isEmpty());
   }
 
