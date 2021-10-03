@@ -1,8 +1,9 @@
 plugins {
-    id 'com.github.sherter.google-java-format' version '0.5'
+    id 'com.github.sherter.google-java-format' version '0.9'
+    id 'java'
+    id 'application'
+    id 'jacoco'
 }
-
-apply plugin: 'application'
 
 // project info
 
@@ -36,10 +37,16 @@ mainClassName = 'hw.Main'
 jar {
     manifest {
         attributes 'Main-Class' : mainClassName
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 // dependencies

@@ -3,7 +3,6 @@ package hw;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.Scanner;
-
 import sun.misc.Signal;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
