@@ -2,7 +2,7 @@ name := "consoleapp"
 
 version := "0.1"
 
-javacOptions in compile += "-Xlint:all"
+compile / javacOptions += "-Xlint:all"
 
 javaOptions += "-enableassertions"
 
