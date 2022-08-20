@@ -1,5 +1,9 @@
+
 # Learning objectives
 
+* simple console app example
+* experience with Git source code management
+* building with Gradle
 * stream processing (finite vs. infinite/unbounded)
 * pipes and filters architecture
 * representing streams using the Iterator design pattern
@@ -101,6 +105,10 @@ On Linux or Mac OS X:
 On Windows:
 
     > sbt test
+	
+To run the test with code coverage reports being generated:
+
+    $ sbt jacoco
 
 # Running the application outside SBT
 

@@ -1,5 +1,8 @@
 [![Gradle Build](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml)
 
+*COMP 371/471: refer to [this readme](README-sbt), which describes how to use this
+project with the Scala Build Tool (sbt)*
+
 # Learning objectives
 
 * simple console app example
