@@ -104,11 +104,10 @@ class Tracing {
   public List<TraceEvent> run(final Iterator<String> input) {
     final var tracedInput = traced(input);
     // output sink that traces every invocation of update()
-    final OutputObserver outputToTrace =
-        (final Queue<String> value) -> {
-          final var snapshot = new LinkedList<String>(value);
-          trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
-        };
+    final OutputObserver outputToTrace = value -> {
+      final var snapshot = new LinkedList<String>(value);
+      trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
+    };
     sut.process(tracedInput, outputToTrace);
     return Collections.unmodifiableList(trace);
   }

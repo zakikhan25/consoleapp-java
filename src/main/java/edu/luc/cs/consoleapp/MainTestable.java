@@ -34,19 +34,17 @@ public class MainTestable {
       System.exit(4);
     }
 
-    final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
-
-    final SlidingQueue slidingQueue = new SlidingQueue(lastNWords);
+    final var input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
+    final var slidingQueue = new SlidingQueue(lastNWords);
 
     // an observer instance that sends updates to the console
-    final OutputObserver outputToConsole =
-        (final Queue<String> value) -> {
-          System.out.println(value);
-          // terminate on I/O error such as SIGPIPE
-          if (System.out.checkError()) {
-            System.exit(1);
-          }
-        };
+    final OutputObserver outputToConsole = value -> {
+      System.out.println(value);
+      // terminate on I/O error such as SIGPIPE
+      if (System.out.checkError()) {
+        System.exit(1);
+      }
+    };
 
     slidingQueue.process(input, outputToConsole);
   }
