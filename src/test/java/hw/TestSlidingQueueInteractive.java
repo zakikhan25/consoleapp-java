@@ -1,23 +1,23 @@
 package hw;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSlidingQueueInteractive {
 
   @Test
   public void testInteractiveBehavior() {
     // the test input
-    final Iterator<String> input = Arrays.asList("asdf", "qwer", "oiui", "zxcv").iterator();
+    final var input =List.of("asdf", "qwer", "oiui", "zxcv").iterator();
     // the expected interaction trace
-    final List<TraceEvent> expectedTrace = new LinkedList<>();
+    final var expectedTrace = new LinkedList<TraceEvent>();
     expectedTrace.add(new InputEvent("asdf"));
     expectedTrace.add(new OutputEvent("asdf"));
     expectedTrace.add(new InputEvent("qwer"));
@@ -27,8 +27,8 @@ public class TestSlidingQueueInteractive {
     expectedTrace.add(new InputEvent("zxcv"));
     expectedTrace.add(new OutputEvent("qwer", "oiui", "zxcv"));
     // create and exercise the SUT
-    final SlidingQueue sut = new SlidingQueue(3);
-    final List<TraceEvent> actualTrace = new Tracing(sut).run(input);
+    final var sut = new SlidingQueue(3);
+    final var actualTrace = new Tracing(sut).run(input);
     // make sure the expected and actual traces match
     assertEquals(expectedTrace, actualTrace);
   }
@@ -102,11 +102,11 @@ class Tracing {
   }
 
   public List<TraceEvent> run(final Iterator<String> input) {
-    final Iterator<String> tracedInput = traced(input);
+    final var tracedInput = traced(input);
     // output sink that traces every invocation of update()
     final OutputObserver outputToTrace =
         (final Queue<String> value) -> {
-          final List<String> snapshot = new LinkedList<>(value);
+          final var snapshot = new LinkedList<String>(value);
           trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
         };
     sut.process(tracedInput, outputToTrace);
@@ -123,7 +123,7 @@ class Tracing {
 
       @Override
       public String next() {
-        final String value = input.next();
+        final var value = input.next();
         trace.add(new InputEvent(value));
         return value;
       }

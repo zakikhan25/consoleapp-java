@@ -1,16 +1,16 @@
 name := "consoleapp"
 
-version := "0.1"
+version := "0.2"
 
 compile / javacOptions += "-Xlint:all"
 
 javaOptions += "-enableassertions"
 
-libraryDependencies ++= Seq(
- "org.apache.commons" %  "commons-collections4" % "4.4",
- "com.novocode"       %  "junit-interface"      % "0.11" % Test
+ThisBuild / libraryDependencies ++= Seq(
+  "org.apache.commons" %  "commons-collections4" % "4.4",
+  "net.aichler" % "jupiter-interface" % "0.11.0" % Test,
+  "net.jqwik"   % "jqwik"             % "1.6.5"  % Test
 )
-
 
 jacocoReportSettings := JacocoReportSettings()
   .withThresholds(
@@ -22,5 +22,6 @@ jacocoReportSettings := JacocoReportSettings()
       line = 90,
       clazz = 100)
   )
+  .withFormats(JacocoReportFormats.HTML)
 
 enablePlugins(JavaAppPackaging)
