@@ -1,13 +1,5 @@
-[![Gradle Build](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/lucoodevcourse/consoleapp-java/actions/workflows/gradle-build.yml)
-
-*COMP 371/471: refer to [this readme](README-sbt), which describes how to use this
-project with the Scala Build Tool (sbt)*
-
 # Learning objectives
 
-* simple console app example
-* experience with Git source code management
-* building with Gradle
 * stream processing (finite vs. infinite/unbounded)
 * pipes and filters architecture
 * representing streams using the Iterator design pattern
@@ -15,11 +7,10 @@ project with the Scala Build Tool (sbt)*
 * testability using the Observer design pattern
 * time/space complexity and scalability
 
-
 # System requirements
 
 * [Java 11 SDK or later](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-* [Gradle](https://gradle.org/)
+* [SBT](https://www.scala-sbt.org/1.x/docs/Setup.html)
 
 You may also be able to install these requirements through your package manager or [SDKMAN!](https://sdkman.io/).
 
@@ -41,7 +32,15 @@ If multiple words are entered on the same line, the application processes them s
 # Examples
 
 ```
-$ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main 3
+$ sbt "run 3"
+[info] ...
+Multiple main classes detected, select one to run:
+
+ [1] hw.Main
+ [2] hw.MainLeaky
+ [3] hw.MainTestableva-sbt
+1
+[info] running hw.Main
 w1 w2
 [w1]
 [w1, w2]
@@ -57,86 +56,62 @@ EOF
 
 # Running the application
 
-For the remaining commands to work, you should be in the project root directory, e.g., `/home/yourid/StudioProjects/cs313413f20p1a`.
-
 On Linux or Mac OS X:
 
-    $ ./gradlew run
+    $ sbt run
 
-or with an explicit argument and redirecting stdin from a sample file:
+or
 
-    $ ./gradlew run --args="3" < build.gradle
+    $ sbt "run arg1 arg2 arg3"
 
 On Windows:
 
-    > gradlew run
+    > sbt run
 
-or with an explicit argument and redirecting stdin from a sample file:
+or
 
-    > gradlew run --args="3" < build.gradle
+    > sbt "run arg1 arg2 arg3"
+
+SBT will then prompt you to choose the specific main class you want to run.
+
+# Running a specific main class directly
+
+On Linux or Mac OS X:
+
+    $ sbt "runMain hw.Main"
+
+or
+
+    $ sbt "runMain hw.Main arg1 arg2 arg3"
+
+On Windows:
+
+    > sbt "runMain hw.Main"
+
+or
+
+    > sbt "runMain hw.Main arg1 arg2 arg3"
 
 # Running the tests
 
 On Linux or Mac OS X:
 
-    $ ./gradlew test
+    $ sbt test
 
 On Windows:
 
-    > gradlew test
+    > sbt test
 
-## Generating the test coverage reports
+# Running the application outside SBT
+
+This avoids the performance overhead of running the application through SBT and allows passing command-line arguments directly:
 
 On Linux or Mac OS X:
 
-    $ ./gradlew jacocoTestReport
+    $ sbt stage
+    $ ./target/universal/stage/bin/main arg1 arg2 arg3
 
 On Windows:
 
-    > gradlew jacocoTestReport
-
-The formatted HTML test coverage report will show up in 
-
-    build/reports/jacoco/test/html/index.html
-
-On Linux, assuming you're in the project root directory, you can open the test coverage report from the command line:
-
-    $ xdg-open build/reports/jacoco/test/html/index.html
-
-On Mac OS X, you can just use the `open` command:
-
-    $ open build/reports/jacoco/test/html/index.html
-
-# Running the application outside Gradle
-
-On Linux or Mac OS X:
-
-    $ ./gradlew jar startScript
-    $ ./build/scripts/consoleapp-java
-
-On Windows:
-
-    > gradlew jar startScript
-    > build\scripts\consoleapp-java
-
-This allows using the application as part of a [pipeline](https://ss64.com/nt/syntax-redirection.html):
-
-    $ yes hello | ./build/scripts/consoleapp-java | head -n 10
-
-Furthermore, using the "fat" jar, which contains the application code plus its dependencies, one can choose among the various versions of the main application.
-This requires having the `java` executable in the execution path.
-Add command-line arguments and input/output redirect as needed.
-
-On Linux or Mac OS X:
-
-    $ ./gradlew jar
-    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main
-    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainLeaky
-    $ java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainTestable
-
-On Windows:
-
-    > gradlew jar
-    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.Main
-    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainLeaky
-    > java -cp build/lib/consoleapp-java-0.1-SNAPSHOT.jar hw.MainTestable
+    > sbt stage
+    > .\target\universal\stage\bin\main arg1 arg2 arg3
