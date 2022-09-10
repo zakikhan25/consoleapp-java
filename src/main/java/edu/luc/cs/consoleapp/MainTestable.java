@@ -1,14 +1,13 @@
-package hw;
+package edu.luc.cs.consoleapp;
 
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.Scanner;
-import org.apache.commons.collections4.queue.CircularFifoQueue;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
 
-public class Main {
+public class MainTestable {
 
   public static final int LAST_N_WORDS = 10;
 
@@ -36,16 +35,19 @@ public class Main {
     }
 
     final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
-    final Queue<String> queue = new CircularFifoQueue<>(lastNWords);
 
-    while (input.hasNext()) {
-      final var word = input.next();
-      queue.add(word); // the oldest item automatically gets evicted
-      System.out.println(queue);
-      // terminate on I/O error such as SIGPIPE
-      if (System.out.checkError()) {
-        System.exit(1);
-      }
-    }
+    final SlidingQueue slidingQueue = new SlidingQueue(lastNWords);
+
+    // an observer instance that sends updates to the console
+    final OutputObserver outputToConsole =
+        (final Queue<String> value) -> {
+          System.out.println(value);
+          // terminate on I/O error such as SIGPIPE
+          if (System.out.checkError()) {
+            System.exit(1);
+          }
+        };
+
+    slidingQueue.process(input, outputToConsole);
   }
 }

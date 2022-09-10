@@ -1,4 +1,4 @@
-package hw;
+package edu.luc.cs.consoleapp;
 
 import java.util.ArrayList;
 import java.util.Collections;
