@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
-import sun.misc.Signal;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
@@ -38,18 +37,16 @@ public class MainLeaky {
       System.exit(4);
     }
 
-    // properly terminate on SIGPIPE received from downstream
-    // see also http://lucproglangcourse.github.io/imperative.html#the-role-of-console-applications
-    if (System.getProperty("os.name").indexOf("Windows") < 0) {
-      Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
-    }
-
     final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
 
     final var result = new LeakyQueue(lastNWords).process(input);
 
     for (final var value : result) {
       System.out.println(value);
+      // terminate on I/O error such as SIGPIPE
+      if (System.out.checkError()) {
+        System.exit(1);
+      }
     }
   }
 
@@ -64,9 +61,9 @@ public class MainLeaky {
     private List<Queue<String>> process(final Iterator<String> input) {
       final List<Queue<String>> result = new LinkedList<>();
       while (input.hasNext()) {
-        final String word = input.next();
+        final var word = input.next();
         queue.add(word); // the oldest item automatically gets evicted
-        final Queue<String> snapshot = new LinkedList<>(queue);
+        final var snapshot = new LinkedList<>(queue);
         result.add(snapshot);
       }
       return result;

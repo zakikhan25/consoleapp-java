@@ -14,7 +14,7 @@ class SlidingQueue {
 
   public void process(final Iterator<String> input, final OutputObserver output) {
     while (input.hasNext()) {
-      final String word = input.next();
+      final var word = input.next();
       queue.add(word); // the oldest item automatically gets evicted
       output.accept(queue);
     }

@@ -3,7 +3,6 @@ package hw;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.Scanner;
-import sun.misc.Signal;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
@@ -35,18 +34,19 @@ public class MainTestable {
       System.exit(4);
     }
 
-    // properly terminate on SIGPIPE received from downstream
-    // see also http://lucproglangcourse.github.io/imperative.html#the-role-of-console-applications
-    if (System.getProperty("os.name").indexOf("Windows") < 0) {
-      Signal.handle(new Signal("PIPE"), (final Signal sig) -> System.exit(1));
-    }
-
     final Iterator<String> input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
 
     final SlidingQueue slidingQueue = new SlidingQueue(lastNWords);
 
     // an observer instance that sends updates to the console
-    final OutputObserver outputToConsole = (final Queue<String> value) -> System.out.println(value);
+    final OutputObserver outputToConsole =
+        (final Queue<String> value) -> {
+          System.out.println(value);
+          // terminate on I/O error such as SIGPIPE
+          if (System.out.checkError()) {
+            System.exit(1);
+          }
+        };
 
     slidingQueue.process(input, outputToConsole);
   }
