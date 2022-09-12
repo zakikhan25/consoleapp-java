@@ -2,10 +2,9 @@ package edu.luc.cs.consoleapp;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +14,7 @@ public class TestSlidingQueueInteractive {
   @Test
   public void testInteractiveBehavior() {
     // the test input
-    final var input =List.of("asdf", "qwer", "oiui", "zxcv").iterator();
+    final var input =Stream.of("asdf", "qwer", "oiui", "zxcv");
     // the expected interaction trace
     final var expectedTrace = new LinkedList<TraceEvent>();
     expectedTrace.add(new InputEvent("asdf"));
@@ -94,38 +93,27 @@ class Tracing {
 
   private final SlidingQueue sut;
 
-  /** The actual interaction event trace. */
+  /**
+   * The actual interaction event trace.
+   */
   private final List<TraceEvent> trace = new LinkedList<>();
 
   public Tracing(final SlidingQueue sut) {
     this.sut = sut;
   }
 
-  public List<TraceEvent> run(final Iterator<String> input) {
-    final var tracedInput = traced(input);
+  public List<TraceEvent> run(final Stream<String> input) {
+    final var tracedInput = input.map(value -> {
+      trace.add(new InputEvent(value));
+      return value;
+    });
     // output sink that traces every invocation of update()
     final OutputObserver outputToTrace = value -> {
-      final var snapshot = new LinkedList<String>(value);
-      trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
+      final var snapshot = new LinkedList<>(value);
+      trace.add(new OutputEvent(snapshot.toArray(new String[]{})));
+      return true;
     };
     sut.process(tracedInput, outputToTrace);
     return Collections.unmodifiableList(trace);
-  }
-
-  /** Instruments (decorates) the iterator to trace every invocation of next(). */
-  private Iterator<String> traced(final Iterator<String> input) {
-    return new Iterator<String>() {
-      @Override
-      public boolean hasNext() {
-        return input.hasNext();
-      }
-
-      @Override
-      public String next() {
-        final var value = input.next();
-        trace.add(new InputEvent(value));
-        return value;
-      }
-    };
   }
 }

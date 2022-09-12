@@ -1,7 +1,5 @@
 package edu.luc.cs.consoleapp;
 
-import java.util.Iterator;
-import java.util.Queue;
 import java.util.Scanner;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
@@ -41,11 +39,9 @@ public class MainTestable {
     final OutputObserver outputToConsole = value -> {
       System.out.println(value);
       // terminate on I/O error such as SIGPIPE
-      if (System.out.checkError()) {
-        System.exit(1);
-      }
+      return !System.out.checkError();
     };
 
-    slidingQueue.process(input, outputToConsole);
+    slidingQueue.process(input.tokens(), outputToConsole);
   }
 }

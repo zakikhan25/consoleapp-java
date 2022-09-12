@@ -1,17 +1,13 @@
 package edu.luc.cs.consoleapp;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.stream.Stream;
-
 import org.apache.commons.collections4.queue.CircularFifoQueue;
+
+import java.util.Scanner;
 
 // see https://stackoverflow.com/questions/1963806/#21699069
 // why we're using this implementation instead of java.util.ArrayQueue!
 
-public class MainLeaky {
+public class MainStream {
 
   public static final int LAST_N_WORDS = 10;
 
@@ -39,33 +35,13 @@ public class MainLeaky {
     }
 
     final var input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
-    final var result = new LeakyQueue(lastNWords).process(input.tokens());
+    final var queue = new CircularFifoQueue<>(lastNWords);
 
-    result.forEach(value -> {
-      System.out.println(value);
-      // terminate on I/O error such as SIGPIPE
-      if (System.out.checkError()) {
-        System.exit(1);
-      }
-    });
-  }
-
-  private static class LeakyQueue {
-
-    private final Queue<String> queue;
-
-    public LeakyQueue(final int capacity) {
-      queue = new CircularFifoQueue<>(capacity);
-    }
-
-    private List<Queue<String>> process(final Stream<String> input) {
-      final List<Queue<String>> result = new LinkedList<>();
-      input.forEach(word -> {
-        queue.add(word); // the oldest item automatically gets evicted
-        final var snapshot = new LinkedList<>(queue);
-        result.add(snapshot);
-      });
-      return result;
-    }
+    input.tokens()
+        .takeWhile(word -> !System.out.checkError())
+        .forEach(word -> {
+          queue.add(word); // the oldest item automatically gets evicted
+          System.out.println(queue);
+        });
   }
 }

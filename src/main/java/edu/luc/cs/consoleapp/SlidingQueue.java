@@ -1,7 +1,8 @@
 package edu.luc.cs.consoleapp;
 
-import java.util.Iterator;
 import java.util.Queue;
+import java.util.stream.Stream;
+
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 
 class SlidingQueue {
@@ -12,10 +13,11 @@ class SlidingQueue {
     this.queue = new CircularFifoQueue<>(queueSize);
   }
 
-  public void process(final Iterator<String> input, final OutputObserver output) {
-    input.forEachRemaining(word -> {
-      queue.add(word); // the oldest item automatically gets evicted
-      output.accept(queue);
-    });
+  public void process(final Stream<String> input, final OutputObserver output) {
+    input.takeWhile(word -> {
+          queue.add(word); // the oldest item automatically gets evicted
+          return output.test(queue);
+        })
+        .count(); // forces evaluation of the entire stream
   }
 }
