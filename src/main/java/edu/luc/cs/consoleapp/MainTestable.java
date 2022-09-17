@@ -36,11 +36,12 @@ public class MainTestable {
     final var slidingQueue = new SlidingQueue(lastNWords);
 
     // an observer instance that sends updates to the console
-    final OutputObserver outputToConsole = value -> {
-      System.out.println(value);
-      // terminate on I/O error such as SIGPIPE
-      return !System.out.checkError();
-    };
+    final OutputObserver outputToConsole =
+        value -> {
+          System.out.println(value);
+          // terminate on I/O error such as SIGPIPE
+          return !System.out.checkError();
+        };
 
     slidingQueue.process(input.tokens(), outputToConsole);
   }

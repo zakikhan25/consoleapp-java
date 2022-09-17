@@ -14,10 +14,12 @@ class SlidingQueue {
   }
 
   public void process(final Stream<String> input, final OutputObserver output) {
-    input.takeWhile(word -> {
-          queue.add(word); // the oldest item automatically gets evicted
-          return output.test(queue);
-        })
+    input
+        .takeWhile(
+            word -> {
+              queue.add(word); // the oldest item automatically gets evicted
+              return output.test(queue);
+            })
         .count(); // forces evaluation of the entire stream
   }
 }

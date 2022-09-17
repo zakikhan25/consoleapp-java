@@ -37,11 +37,13 @@ public class MainStream {
     final var input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
     final var queue = new CircularFifoQueue<>(lastNWords);
 
-    input.tokens()
+    input
+        .tokens()
         .takeWhile(word -> !System.out.checkError())
-        .forEach(word -> {
-          queue.add(word); // the oldest item automatically gets evicted
-          System.out.println(queue);
-        });
+        .forEach(
+            word -> {
+              queue.add(word); // the oldest item automatically gets evicted
+              System.out.println(queue);
+            });
   }
 }

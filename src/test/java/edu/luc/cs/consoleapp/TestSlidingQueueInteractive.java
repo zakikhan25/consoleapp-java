@@ -14,7 +14,7 @@ public class TestSlidingQueueInteractive {
   @Test
   public void testInteractiveBehavior() {
     // the test input
-    final var input =Stream.of("asdf", "qwer", "oiui", "zxcv");
+    final var input = Stream.of("asdf", "qwer", "oiui", "zxcv");
     // the expected interaction trace
     final var expectedTrace = new LinkedList<TraceEvent>();
     expectedTrace.add(new InputEvent("asdf"));
@@ -93,9 +93,7 @@ class Tracing {
 
   private final SlidingQueue sut;
 
-  /**
-   * The actual interaction event trace.
-   */
+  /** The actual interaction event trace. */
   private final List<TraceEvent> trace = new LinkedList<>();
 
   public Tracing(final SlidingQueue sut) {
@@ -103,16 +101,19 @@ class Tracing {
   }
 
   public List<TraceEvent> run(final Stream<String> input) {
-    final var tracedInput = input.map(value -> {
-      trace.add(new InputEvent(value));
-      return value;
-    });
+    final var tracedInput =
+        input.map(
+            value -> {
+              trace.add(new InputEvent(value));
+              return value;
+            });
     // output sink that traces every invocation of update()
-    final OutputObserver outputToTrace = value -> {
-      final var snapshot = new LinkedList<>(value);
-      trace.add(new OutputEvent(snapshot.toArray(new String[]{})));
-      return true;
-    };
+    final OutputObserver outputToTrace =
+        value -> {
+          final var snapshot = new LinkedList<>(value);
+          trace.add(new OutputEvent(snapshot.toArray(new String[] {})));
+          return true;
+        };
     sut.process(tracedInput, outputToTrace);
     return Collections.unmodifiableList(trace);
   }

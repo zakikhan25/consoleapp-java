@@ -41,13 +41,14 @@ public class MainLeaky {
     final var input = new Scanner(System.in).useDelimiter("(?U)[^\\p{Alpha}0-9']+");
     final var result = new LeakyQueue(lastNWords).process(input.tokens());
 
-    result.forEach(value -> {
-      System.out.println(value);
-      // terminate on I/O error such as SIGPIPE
-      if (System.out.checkError()) {
-        System.exit(1);
-      }
-    });
+    result.forEach(
+        value -> {
+          System.out.println(value);
+          // terminate on I/O error such as SIGPIPE
+          if (System.out.checkError()) {
+            System.exit(1);
+          }
+        });
   }
 
   private static class LeakyQueue {
@@ -60,11 +61,12 @@ public class MainLeaky {
 
     private List<Queue<String>> process(final Stream<String> input) {
       final List<Queue<String>> result = new LinkedList<>();
-      input.forEach(word -> {
-        queue.add(word); // the oldest item automatically gets evicted
-        final var snapshot = new LinkedList<>(queue);
-        result.add(snapshot);
-      });
+      input.forEach(
+          word -> {
+            queue.add(word); // the oldest item automatically gets evicted
+            final var snapshot = new LinkedList<>(queue);
+            result.add(snapshot);
+          });
       return result;
     }
   }
