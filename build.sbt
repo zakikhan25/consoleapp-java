@@ -17,11 +17,13 @@ jacocoReportSettings := JacocoReportSettings()
     JacocoThresholds(
       instruction = 80,
       method = 100,
-      branch = 100,
+      branch = 0, // FIXME workaround 0 of 0 missed = 0% bug
       complexity = 100,
       line = 90,
       clazz = 100)
   )
   .withFormats(JacocoReportFormats.HTML)
+
+jacocoExcludes := Seq("edu.luc.cs.consoleapp.Main*")
 
 enablePlugins(JavaAppPackaging)
