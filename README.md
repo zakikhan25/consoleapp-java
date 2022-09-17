@@ -1,3 +1,5 @@
+[![Java sbt CI](https://github.com/lucproglangcourse/consoleapp-java/actions/workflows/java-sbt.yml/badge.svg)](https://github.com/lucproglangcourse/consoleapp-java/actions/workflows/java-sbt.yml)
+
 # Learning objectives
 
 * stream processing (finite vs. infinite/unbounded)
@@ -9,7 +11,7 @@
 
 # System requirements
 
-* [Java 11 SDK or later](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+* Java 11 SDK or later (Java 17 LTS release recommended)
 * [SBT](https://www.scala-sbt.org/1.x/docs/Setup.html)
 
 You may also be able to install these requirements through your package manager or [SDKMAN!](https://sdkman.io/).
@@ -56,51 +58,45 @@ EOF
 
 # Running the application
 
-On Linux or Mac OS X:
+Without command-line arguments:
 
     $ sbt run
 
-or
+With a specific command-line argument (sliding queue capacity):
 
-    $ sbt "run arg1 arg2 arg3"
-
-On Windows:
-
-    > sbt run
-
-or
-
-    > sbt "run arg1 arg2 arg3"
+    $ sbt "run 3"
 
 SBT will then prompt you to choose the specific main class you want to run.
 
 # Running a specific main class directly
 
-On Linux or Mac OS X:
-
-    $ sbt "runMain hw.Main"
+    $ sbt "runMain edu.cs.luc.consoleapp.Main"
 
 or
 
-    $ sbt "runMain hw.Main arg1 arg2 arg3"
-
-On Windows:
-
-    > sbt "runMain hw.Main"
-
-or
-
-    > sbt "runMain hw.Main arg1 arg2 arg3"
+    $ sbt "runMain edu.cs.luc.consoleapp.Main 3"
 
 # Running the tests
 
-On Linux or Mac OS X:
-
     $ sbt test
 
-On Windows:
+# Generating the test coverage reports
 
-    > sbt test
+    $ sbt jacoco
+
+You will then see a summary report in the terminal, and you can view the full report in a web browser.
+(Note that these will get generated only after all tests pass.)
+
+On macOS:
+
+    $ open target/scala-2.12/jacoco/report/html/index.html
+
+On Linux:
+
+    $ xdg-open target/scala-2.12/jacoco/report/html/index.html
+
+On Windows: please let me know if you know how to do this from the WSL
+command line. Otherwise you can open the index file in your web browser.
 
 # Running the application outside SBT
 
@@ -109,9 +105,9 @@ This avoids the performance overhead of running the application through SBT and 
 On Linux or Mac OS X:
 
     $ sbt stage
-    $ ./target/universal/stage/bin/main arg1 arg2 arg3
+    $ ./target/universal/stage/bin/main 3
 
 On Windows:
 
     > sbt stage
-    > .\target\universal\stage\bin\main arg1 arg2 arg3
+    > .\target\universal\stage\bin\main 3
