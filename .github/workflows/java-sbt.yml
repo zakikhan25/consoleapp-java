@@ -19,5 +19,3 @@ jobs:
         java-version: '17'
     - name: Run tests
       run: sbt jacoco
-    - name: Submit coverage report
-      run: bash <(curl -s https://codecov.io/bash)
