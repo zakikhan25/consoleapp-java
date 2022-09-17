@@ -24,6 +24,6 @@ jacocoReportSettings := JacocoReportSettings()
   )
   .withFormats(JacocoReportFormats.HTML)
 
-jacocoExcludes := Seq("edu.luc.cs.consoleapp.Main*")
+jacocoExcludes := Seq("**.Main*")
 
 enablePlugins(JavaAppPackaging)
