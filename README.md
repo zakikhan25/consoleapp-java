@@ -70,11 +70,11 @@ SBT will then prompt you to choose the specific main class you want to run.
 
 # Running a specific main class directly
 
-    $ sbt "runMain edu.cs.luc.consoleapp.Main"
+    $ sbt "runMain edu.luc.cs.consoleapp.Main"
 
 or
 
-    $ sbt "runMain edu.cs.luc.consoleapp.Main 3"
+    $ sbt "runMain edu.luc.cs.consoleapp.Main 3"
 
 # Running the tests
 
