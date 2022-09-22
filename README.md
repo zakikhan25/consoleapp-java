@@ -98,6 +98,8 @@ On Linux:
 On Windows: please let me know if you know how to do this from the WSL
 command line. Otherwise you can open the index file in your web browser.
 
+*Note that the report will show 0% coverage as long as there are failing tests.*
+
 # Running the application outside SBT
 
 This avoids the performance overhead of running the application through SBT and allows passing command-line arguments directly:
