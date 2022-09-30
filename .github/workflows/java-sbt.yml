@@ -19,3 +19,4 @@ jobs:
         java-version: '17'
     - name: Run tests
       run: sbt jacoco
+    - uses: codecov/codecov-action@v3

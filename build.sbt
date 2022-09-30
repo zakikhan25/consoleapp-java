@@ -22,7 +22,7 @@ jacocoReportSettings := JacocoReportSettings()
       line = 90,
       clazz = 100)
   )
-  .withFormats(JacocoReportFormats.HTML)
+  .withFormats(JacocoReportFormats.HTML, JacocoReportFormats.XML)
 
 jacocoExcludes := Seq("**.Main*")
 
