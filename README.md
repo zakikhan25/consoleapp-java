@@ -1,5 +1,5 @@
 [![Java sbt CI](https://github.com/lucproglangcourse/consoleapp-java/actions/workflows/java-sbt.yml/badge.svg)](https://github.com/lucproglangcourse/consoleapp-java/actions/workflows/java-sbt.yml)
-[![codecov](https://codecov.io/github/lucproglangcourse/consoleapp-java/branch/master/graph/badge.svg?token=506MZ2VOP0)](https://codecov.io/github/lucproglangcourse/consoleapp-java)
+[![codecov](https://codecov.io/github/lucproglangcourse/consoleapp-java/branch/main/graph/badge.svg?token=506MZ2VOP0)](https://codecov.io/github/lucproglangcourse/consoleapp-java)
 
 # Learning objectives
 
