@@ -12,7 +12,7 @@
 
 # System requirements
 
-* Java 11 SDK or later (Java 17 LTS release recommended)
+* Java 11 SDK or later (Java 21 LTS release recommended)
 * [SBT](https://www.scala-sbt.org/1.x/docs/Setup.html)
 
 You may also be able to install these requirements through your package manager or [SDKMAN!](https://sdkman.io/).
