@@ -12,11 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
+    - uses: actions/checkout@v5
+    - uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '21'
+    - uses: sbt/setup-sbt@v1
     - name: Run tests
       run: sbt jacoco
     - uses: codecov/codecov-action@v4
