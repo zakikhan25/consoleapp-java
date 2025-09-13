@@ -12,5 +12,5 @@ ThisBuild / libraryDependencies ++= Seq(
 
 enablePlugins(JavaAppPackaging)
 
-// Specify the Scala main class to avoid multiple main class conflicts
+// Scala main class avoid multiple main class conflicts
 Compile / mainClass := Some("edu.luc.cs.consoleapp.MainScala")
